@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/home']" routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact: true}">Zdravotni System</a>
+    <button class="navbar-toggler" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapseNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" *ngIf="isUserAuthenticated()">
+          <a class="nav-link" [routerLink]="['/my-profile']" routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}">My Profile</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isDoctor()">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/working-hours']" routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}">My Working Hours</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isAdmin() || isDoctor()">
+        <li class="nav-item">
+          <a class="nav-link" (click)="showTable($event, 'patient')" routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}">Patients</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isAdmin()">
+        <li class="nav-item">
+          <a class="nav-link" (click)="showTable($event, 'doctor')" routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}">Doctors</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isAdmin() || isDoctor()">
+        <li class="nav-item">
+          <a class="nav-link" (click)="showTable($event, 'appintment')" routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}">Appointments</a>
+        </li>
+      </ul>
+      <div class="collapse navbar-collapse" id="collapseNav" *ngIf="isAdmin()">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item" *ngIf="isAdmin()">
+            <a class="nav-link" [routerLink]="['/create-user']" routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}">Create User</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!--<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="" (click)="doctorsTable($event)">Doctors</a>
+      </li>
+    </ul>-->
+    <!--<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="" (click)="myAppointmentsTable($event)">Doctors</a>
+      </li>
+    </ul>-->
+    <!--<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="" (click)="appointmentsTable($event)">Appointments</a>
+      </li>
+    </ul>-->
+
+    <form class="d-flex">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isUserAuthenticated()">
+        <li class="nav-item">
+          <a class="nav-link" (click)="logout()" routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}">Logout</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="!isUserAuthenticated()">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/registration']" routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}">Register</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <!--</div>-->
+</nav>
