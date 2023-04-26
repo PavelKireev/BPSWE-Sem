@@ -34,6 +34,9 @@ export class LoginComponent {
       this.router.navigate(["my-profile"]);
     }, err => {
       this.invalidLogin = true;
+      setTimeout(() => {
+        this.invalidLogin = false;
+      }, 3000);
     });
   }
 
