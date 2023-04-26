@@ -26,16 +26,22 @@ namespace ZdravotniSystem.Util
 
 
             List<DateTime> busyDates =
-                new AppointmentRepository()
-                .FindAllByDoctorId(workingHours[0].DoctorId)
-                .Select(item => DateTime.Parse(item.Time)).ToList();
-
-
+                new AppointmentRepository().FindAllByDoctorId(workingHours[0].DoctorId)
+                                           .Select(
+                                               item => DateTime.ParseExact(
+                                                   item.Time,
+                                                   "MM/dd/yyyy HH:mm:ss",
+                                                   CultureInfo.InvariantCulture)
+                                               ).ToList();
+            
             DateTime currentTime = DateTime.Now;
 
             while (!DateTime.Now.Day.Equals(currentTime.AddDays(14).Day))
             {
-                WorkingHours wh = workingHours.Find(item => item.DayOfWeek.ToString().Equals(currentTime.DayOfWeek.ToString()));
+                WorkingHours wh =
+                    workingHours.Find(item => item.DayOfWeek
+                                                                   .ToString()
+                                                                   .Equals(currentTime.DayOfWeek.ToString()));
 
                 if (wh != null)
                 {

@@ -17,7 +17,7 @@ namespace ZdravotniSystem.Repository
         {
             SQLiteCommand cmd = new(Connection);
 
-            cmd.CommandText = string.Format("SELECT p FROM patient WHERE id = {0} ;", id);
+            cmd.CommandText = $"SELECT * FROM patient INNER JOIN users USING(email) WHERE id = {id} ;";
             cmd.CommandType = CommandType.Text;
 
             SQLiteDataReader reader = cmd.ExecuteReader();
@@ -32,7 +32,7 @@ namespace ZdravotniSystem.Repository
         {
             SQLiteCommand cmd = new(Connection);
 
-            cmd.CommandText = string.Format("SELECT * FROM patient INNER JOIN users USING(email) WHERE email = '{0}' ;", email);
+            cmd.CommandText = $"SELECT * FROM patient INNER JOIN users USING(email) WHERE email = '{email}' ;";
             cmd.CommandType = CommandType.Text;
 
             SQLiteDataReader reader = cmd.ExecuteReader();

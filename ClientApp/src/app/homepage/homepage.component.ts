@@ -73,9 +73,10 @@ export class HomepageComponent {
   public delete($event: any, email: string): void {
     this.httpClient.delete(
       configurl.apiServer.url + "/api/patient/delete?email=" + email
-    ).subscribe(
-      _ => this.tableList = this.tableList?.filter(user => user.email !== email),
-      error => console.log("User delete error.")
+    ).subscribe({
+        next: _ => this.tableList = this.tableList?.filter(user => user.email !== email),
+        error: error => console.log("User delete error.")
+      }
     );
   }
 }

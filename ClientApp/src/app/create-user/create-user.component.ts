@@ -6,10 +6,12 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import configurl from '../../assets/config/config.json';
 import { AuthService } from "../service/auth.service";
 import { PasswordConfirmationValidatorService } from "../shared/custom-validators/password-confirmation-validator.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'create-user-component',
   templateUrl: './create-user.component.html',
+  styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent {
 
@@ -33,7 +35,8 @@ export class CreateUserComponent {
     private jwtHelper: JwtHelperService,
     private httpClient: HttpClient,
     private passConfValidator: PasswordConfirmationValidatorService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -75,7 +78,7 @@ export class CreateUserComponent {
         "Content-Type": "application/json"
       })
     }).subscribe({
-      next: (_) => this.router.navigate(["homepage"]),
+      next: (_) => this.snackBar.open(`User successfully created: ${user.email}`, "OK" )
     });
   }
 }

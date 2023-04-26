@@ -17,7 +17,7 @@ namespace ZdravotniSystem.Repository
         {
             SQLiteCommand cmd = new(Connection);
 
-            cmd.CommandText = string.Format("SELECT * FROM doctor WHERE id = {0} ;", id);
+            cmd.CommandText = $"SELECT * FROM users INNER JOIN doctor USING({id}) WHERE id = {id} ;";
             cmd.CommandType = CommandType.Text;
 
             SQLiteDataReader reader = cmd.ExecuteReader();
@@ -34,7 +34,7 @@ namespace ZdravotniSystem.Repository
 
             SQLiteCommand cmd = Connection.CreateCommand();
 
-            cmd.CommandText = "SELECT DISTINCT * FROM doctor INNER JOIN users USING(email); ";
+            cmd.CommandText = "SELECT DISTINCT * FROM users INNER JOIN doctor USING(email); ";
             cmd.CommandType = CommandType.Text;
             SQLiteDataReader r = cmd.ExecuteReader();
             while (r.Read())
@@ -54,9 +54,8 @@ namespace ZdravotniSystem.Repository
                 string
                     .Format( 
                         "INSERT OR REPLACE INTO doctor (" +
-                        "first_name, last_name, email, office_number" +
-                        ") VALUES('{0}', '{1}', '{2}', {3} );",
-                        doctor.FirstName, doctor.LastName,
+                        "email, office_number" +
+                        ") VALUES('{0}', '{1}' );", 
                         doctor.Email, doctor.OfficeNumber
                     );
 
@@ -93,7 +92,7 @@ namespace ZdravotniSystem.Repository
         {
             SQLiteCommand cmd = new(Connection);
 
-            cmd.CommandText = string.Format("SELECT * FROM doctor INNER JOIN users USING(email) WHERE email = '{0}' ;", email);
+            cmd.CommandText = string.Format("SELECT * FROM users INNER JOIN doctor USING(email) WHERE email = '{0}' ;", email);
             cmd.CommandType = CommandType.Text;
 
             SQLiteDataReader reader = cmd.ExecuteReader();
