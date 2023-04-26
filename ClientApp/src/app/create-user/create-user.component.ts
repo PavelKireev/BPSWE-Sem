@@ -40,11 +40,10 @@ export class CreateUserComponent {
   ) { }
 
   ngOnInit(): void {
-    const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
-    const phonePattern = /\s*([0-9]{3})\s*([0-9]{3})\s*([0-9]{3})$/;
+    const passwordPattern = /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/;
 
     this.passwordForm = new FormGroup({
-      password: new FormControl(''),
+      password: new FormControl('',[Validators.required, Validators.pattern(passwordPattern)]),
       confirm: new FormControl('')
     });
     this.passwordForm.get('confirm')?.setValidators([Validators.required, this.passConfValidator.validateConfirmPassword(this.passwordForm?.get('password'))]);
