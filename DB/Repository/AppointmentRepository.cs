@@ -38,15 +38,15 @@ namespace ZdravotniSystem.Repository
             SQLiteCommand cmd = new(Connection);
 
             cmd.CommandText = "SELECT *, " +
-                "d.first_name AS doctor_name, " +
                 "d.last_name AS doctor_lastname, " +
+                "d.first_name AS doctor_name, " +
                 "d.email AS doctor_email, " +
                 "p.first_name AS patient_name, " +
                 "p.last_name AS patient_lastname, " +
                 "p.email AS patient_email " +
                 "FROM appointment a " +
-                "INNER JOIN doctor d ON d.id = a.doctor_id " +
-                "INNER JOIN patient p ON p.id = a.pacient_id ";
+                "INNER JOIN users d ON d.id = a.doctor_id " +
+                "INNER JOIN users p ON p.id = a.patient_id ";
 
             cmd.CommandType = CommandType.Text;
             SQLiteDataReader r = cmd.ExecuteReader();
@@ -73,8 +73,8 @@ namespace ZdravotniSystem.Repository
                 "p.last_name AS patient_lastname, " +
                 "p.email AS patient_email " +
                 "FROM appointment a " +
-                "INNER JOIN doctor d ON d.id = a.doctor_id " +
-                "INNER JOIN patient p ON p.id = a.pacient_id " +
+                "INNER JOIN users d ON d.id = a.doctor_id " +
+                "INNER JOIN users p ON p.id = a.patient_id " +
                 "WHERE doctor_id = {0} ", id);
 
 
@@ -97,8 +97,8 @@ namespace ZdravotniSystem.Repository
                 string
                     .Format(
                         "INSERT OR REPLACE INTO appointment (" +
-                        "doctor_id, pacient_id, time" +
-                        ") VALUES({0}, {1}, '{2}' );",
+                        "doctor_id, patient_id, time" +
+                        ") VALUES( {0}, {1}, '{2}' );",
                         appointment.Doctor.Id, appointment.Patient.Id, appointment.Time
                     );
 

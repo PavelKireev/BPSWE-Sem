@@ -22,8 +22,11 @@ namespace ZdravotniSystem.Service
         private readonly IPatientRepository _repository;
         private readonly IUserRepository _userRepository;
 
-        public PatientService(ILogger<PatientService> logger, IPatientRepository repository, IUserRepository userRepository)
-        {
+        public PatientService(
+            ILogger<PatientService> logger, 
+            IPatientRepository repository, 
+            IUserRepository userRepository
+        ) {
             _logger = logger;
             _repository = repository;
             _userRepository = userRepository;
@@ -52,7 +55,8 @@ namespace ZdravotniSystem.Service
                 LastName = model.LastName,
                 Email = model.Email,
                 Password = model.Password,
-
+                InsuranceNumber = model.InsuranceNumber,
+                PhoneNumber = model.PhoneNumber
             };
             _userRepository.Save(patient, "PATIENT");
             _repository.Save(patient);

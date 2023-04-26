@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ZdravotniSystem.DB.Entity;
+using ZdravotniSystem.DTO;
+using ZdravotniSystem.Model;
 using ZdravotniSystem.Service;
 
 namespace ZdravotniSystem.Controllers
@@ -17,13 +19,17 @@ namespace ZdravotniSystem.Controllers
         }
 
         [HttpGet("list")]
-        public List<Appointment> Get()
+        public IEnumerable<AppointmentDto> Get()
         {
-            return _appointmentService.FindAll();
+            return _appointmentService.FindAll()
+                                      .Select(
+                                          appointment => new AppointmentDto()
+                                              .FromAppointment(appointment)
+                                          );
         }
 
         [HttpPost("create")]
-        public void Post([FromBody] Appointment value)
+        public void Post([FromBody] AppointmentModel value)
         {
             _appointmentService.Create(value);
         }

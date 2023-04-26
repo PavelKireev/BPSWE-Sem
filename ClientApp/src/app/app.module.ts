@@ -23,6 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { WorkingHoursComponent } from './working-hours/working-hours.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { WorkingHoursService } from './service/working-hours.service';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
 
 const routes: Routes = [
   { path: '', component: MyProfileComponent },
@@ -61,6 +62,7 @@ export function tokenGetter() {
     FormsModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    MatSnackBarModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
     MatSelectModule,
@@ -78,7 +80,8 @@ export function tokenGetter() {
     AuthGuard,
     MatDatepickerModule,
     AuthService,
-    WorkingHoursService
+    WorkingHoursService,
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500 }}
   ],
   bootstrap: [AppComponent]
 })

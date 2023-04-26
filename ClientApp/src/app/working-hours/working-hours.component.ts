@@ -38,7 +38,8 @@ export class WorkingHoursComponent {
   ngOnInit(): void {
     this.list = this.workingHoursService.getAllByDoctorId();
     this.list.subscribe(response => {
-      this.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].filter(day => !response.some(wh => wh.dayOfWeek === day));
+      this.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        .filter(day => !response.some(wh => wh.dayOfWeek === day));
     });
   }
 

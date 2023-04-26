@@ -8,6 +8,7 @@ import { AuthService } from "../service/auth.service";
 @Component({
   selector: 'myprofile-component',
   templateUrl: './myprofile.component.html',
+  styleUrls: ['myprofile.component.css']
 })
 export class MyProfileComponent {
 
@@ -33,7 +34,7 @@ export class MyProfileComponent {
   }
 
   public update(user?: AuthUserDto): void {
-    
+
   }
 
   public isUserAuthenticated(): boolean {

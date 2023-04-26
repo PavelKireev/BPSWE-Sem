@@ -56,7 +56,7 @@ namespace ZdravotniSystem.Service
 
         public void Update(DoctorModel value)
         {
-            Doctor doctor = new Doctor()
+            Doctor doctor = new Doctor
             {
                 Id = value.Id,
                 FirstName = value.FirstName,
