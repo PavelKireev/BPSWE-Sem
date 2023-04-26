@@ -40,6 +40,9 @@ export class CreateUserComponent {
   ) { }
 
   ngOnInit(): void {
+    const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+    const phonePattern = /\s*([0-9]{3})\s*([0-9]{3})\s*([0-9]{3})$/;
+
     this.passwordForm = new FormGroup({
       password: new FormControl(''),
       confirm: new FormControl('')

@@ -49,6 +49,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\.angular\cache\14.2.10\" />
+    <Folder Include="ClientApp\src\assets\images" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
