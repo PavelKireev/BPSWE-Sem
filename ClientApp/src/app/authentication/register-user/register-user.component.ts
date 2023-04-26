@@ -25,7 +25,7 @@ export class RegisterUserComponent implements OnInit {
   url = configurl.apiServer.url + '/api/authentication/';
 
   ngOnInit(): void {
-    const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+    // const passwordPattern = /^(?=(.*[A-Z]){1})(?=(.*[a-z]){1})(?=(.*[0-9]){1})(?=(.*[@#$%^!&+=.\-_*]){1})([a-zA-Z0-9@#$%^!&+=*.\-_]){6,}$/;
 
     this.registerForm = new FormGroup({
       firstName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
@@ -34,7 +34,7 @@ export class RegisterUserComponent implements OnInit {
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
-        Validators.pattern(passwordPattern)
+        // Validators.pattern(passwordPattern)
       ]),
       confirm: new FormControl('')
     });
