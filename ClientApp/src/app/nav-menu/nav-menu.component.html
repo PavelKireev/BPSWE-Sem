@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg" *ngIf="isUserAuthenticated()">
   <div class="container-fluid">
     <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/home']" class="navbar-brand"
-       routerLinkActive="active">HEALTH CLUB</a>
+       routerLinkActive="active">zdravotní systém</a>
     <div class="dots" onclick="this.classList.toggle('active');">
       <div class="dot"></div>
       <div class="dot"></div>
@@ -34,12 +34,14 @@
                routerLinkActive="active">Doctors</a>
           </li>
         </ul>
-        <ul *ngIf="isAdmin() || isDoctor()" class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a (click)="showTable($event, 'appointment')" [routerLinkActiveOptions]="{exact: true}" class="nav-link"
-               routerLinkActive="active">Appointments</a>
-          </li>
-        </ul>
+        <div *ngIf="isAdmin() || isDoctor()">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/appointment']" routerLinkActive="active"
+                 [routerLinkActiveOptions]="{exact: true}">Appointments</a>
+            </li>
+          </ul>
+        </div>
         <div *ngIf="isAdmin()" class="collapse navbar-collapse" id="collapseNav">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li *ngIf="isAdmin()" class="nav-item">
